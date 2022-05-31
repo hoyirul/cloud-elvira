@@ -65,14 +65,14 @@
     </li>
 
     <li class="nav-item active border-top border-bottom">  
-      <a class="nav-link px-5" href="{{ url('/baby') }}">
+      <a class="nav-link px-5" href="/u/book">
         <i class="fas fa-fw fa-book"></i>
         <span>Buku</span>
       </a>
     </li>
 
     <li class="nav-item active border-bottom">  
-      <a class="nav-link px-5" href="/immunization">
+      <a class="nav-link px-5" href="/u/transaction">
         <i class="fas fa-fw fa-money-check"></i>
         <span>Transaksi</span>
       </a>

@@ -36,21 +36,57 @@ body{
     font-family: var(--regular);
 }
 
-
 /* background */
 .bg-primary{
     background-color: var(--primary-color) !important;
 }
 
+.bg-badge-success{
+    background-color: #cbeae4 !important;
+}
+
+.bg-badge-danger{
+    background-color: #f4d5d8 !important;
+}
+
+.bg-badge-info{
+    background-color: #caefff !important;
+}
+
 .bg-light{
     background-color: var(--light) !important;
+}
+
+.color-grey{
+    color: #707070 !important;
+}
+
+.color-info{
+    color: #00a6ef !important;
+}
+
+.color-star{
+    color: #d97707 !important;
 }
 /* background */
 
 /* radius */
+.rad-6{
+    border-radius: 6px !important;
+}
+
+.rad-8{
+    border-radius: 8px !important;
+}
+
+.rad-top-8{
+    border-radius: 8px 8px 0px 0px !important;
+}
+
 .rad-10{
     border-radius: 10px !important;
 }
+
 .rad-20{
     border-radius: 20px !important;
 }
@@ -91,6 +127,25 @@ body{
     padding: 10px 8px !important;
 }
 
+.px-12{
+    padding: 0px 12rem;
+}
+
+.top-8{
+    margin-top: -8px;
+}
+
+.top-5{
+    margin-top: -5px;
+}
+
+.top-10{
+    margin-top: -10px;
+}
+
+.top-20{
+    margin-top: -20px;
+}
 /* spacer */
 
 /* button */
@@ -156,6 +211,19 @@ body{
 }
 /* border */
 
+.h-64{
+    height: 16rem !important;
+}
+
+.object-cover{
+    object-fit: cover;
+}
+
+.rounded-lg{
+    border-radius: 6px !important;
+    border: 1px solid #eee;
+}
+
 thead tr{
     font-family: var(--medium) !important;
 }
@@ -186,8 +254,28 @@ tr{
 } */
 /* icon sidebar */
 
+.text-justify{
+    text-align: justify !important;
+}
+
+tr, thead{
+    border-bottom-style: hidden;
+}
+
 #layoutAuthentication{
     height: 100vh !important;
+}
+
+@media screen and (max-width: 1300px) {
+   .px-12{
+        padding: 0px 4rem;
+   } 
+}
+
+@media screen and (max-width: 980px) {
+    .px-12{
+        padding: 0px 0px;
+   } 
 }
 
 @media screen and (max-width: 768px) {
@@ -198,6 +286,14 @@ tr{
     .nav-item .px-5{
         padding: 1rem 0rem !important;
     }
+
+    .main .col-md-3{
+        width: 50%;
+    }
+
+    .h-64{
+        height: 20rem !important;
+    }
 }
 
 @media screen and (max-width: 578px) {
@@ -207,5 +303,21 @@ tr{
 
     .nav-item .px-5{
         padding: 1rem 0rem !important;
+    }
+
+    .main .col-md-3{
+        width: 50%;
+    }
+    
+    .h-64{
+        height: 14rem !important;
+    }
+
+    .card-body h6{
+        font-size: 10pt;
+    }
+
+    .card-body .card-text{
+        font-size: 6pt;
     }
 }
