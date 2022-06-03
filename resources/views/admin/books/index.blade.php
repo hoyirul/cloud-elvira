@@ -51,26 +51,23 @@
               <td>{{ $row->genre->genre }}</td>
               <td>{{ $row->publish_date }}</td>
               <td>{{ $row->price }}</td>
-              <td>{{ $row->book_page }}</td>
+              <td>{{ $row->book_pages }} Pages</td>
               <td class="text-center">
-                @if ($title == 'Admins')     
-                  <a href="/u/admins/{{ $row->user_id }}/edit" class="btn fs-small btn-info text-decoration-none">
+                
+                <form action="/u/book/{{ $row->id }}" onsubmit="return confirm('Apakah anda yakin akan menghapus data?')" method="post">
+                  @csrf
+                  @method('DELETE')  
+                  
+                  <a href="/u/book/{{ $row->id }}/edit" class="btn fs-small btn-info text-decoration-none">
                     <span class="fa fa-fw fa-syringe mx-1"></span>
                     Edit
                   </a>
-                @endif 
-                
-                @if ($title == 'Customers')  
-                  <form action="/u/book/{{ $row->user_id }}" onsubmit="return confirm('Apakah anda yakin akan menghapus data?')" method="post">
-                    @csrf
-                    @method('DELETE')  
 
-                    <button type="submit" class="btn fs-small btn-danger">
-                      <span class="fa fa-fw fa-trash mx-1"></span>
-                    Hapus
-                    </button>
-                  </form>
-                @endif
+                  <button type="submit" class="btn fs-small btn-danger">
+                    <span class="fa fa-fw fa-trash mx-1"></span>
+                  Hapus
+                  </button>
+                </form>
               </td>
             </tr>
             @endforeach

@@ -15,19 +15,32 @@
         <h6 class="font-medium">Dahsboard</h6>
         <p class="top-5 color-grey fs-small text-grey font-regular">App / User / <span class="color-primary">Dashboard</span></p>
         
-        <form action="/" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="_token" value="pxZsPOmRjfoZq9nRfKe8ucPLBXfB3ukvalsnw6fr">            <input type="hidden" name="_method" value="PUT">
+        @if(session('success'))
+          <div class="alert alert-success">
+            {{session('success')}}
+          </div>
+        @endif
+        @if(session('danger'))
+        <div class="alert alert-danger">
+          {{session('danger')}}
+        </div>
+        @endif
+
+        <form action="/user/update" method="post" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+
           <div class="mb-3 row">
             <div class="col-md-6">
               <label for="email" class="fs-normal mb-1">Email : </label>
-              <input type="email" name="email" class="form-control rad-6 fs-normal @error('email') is-invalid @enderror" placeholder="Email">
+              <input type="email" name="email" class="form-control rad-6 fs-normal @error('email') is-invalid @enderror" placeholder="Email" readonly value="{{ $user->user->email }}">
               @error('email')
                 <div class="invalid-feedback ml-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="col-md-6">
               <label for="name" class="fs-normal mb-1">Full Name : </label>
-              <input type="text" name="name" class="form-control rad-6 fs-normal @error('name') is-invalid @enderror" placeholder="Full Name">
+              <input type="text" name="name" class="form-control rad-6 fs-normal @error('name') is-invalid @enderror" placeholder="Full Name" value="{{ $user->name }}">
               @error('name')
                 <div class="invalid-feedback ml-1">{{ $message }}</div>
               @enderror
@@ -37,14 +50,14 @@
           <div class="mb-3 row">
             <div class="col-md-6">
               <label for="phone_number" class="fs-normal mb-1">Phone Number : </label>
-              <input type="text" name="phone_number" class="form-control rad-6 fs-normal @error('phone_number') is-invalid @enderror" placeholder="Phone Number">
+              <input type="text" name="phone_number" class="form-control rad-6 fs-normal @error('phone_number') is-invalid @enderror" placeholder="Phone Number" value="{{ $user->phone_number }}">
               @error('phone_number')
                 <div class="invalid-feedback ml-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="col-md-6">
               <label for="zip_code" class="fs-normal mb-1">Zip Code : </label>
-              <input type="text" name="zip_code" class="form-control rad-6 fs-normal @error('zip_code') is-invalid @enderror" placeholder="Zip Code">
+              <input type="text" name="zip_code" class="form-control rad-6 fs-normal @error('zip_code') is-invalid @enderror" placeholder="Zip Code" value="{{ $user->zip_code }}">
               @error('zip_code')
                 <div class="invalid-feedback ml-1">{{ $message }}</div>
               @enderror
@@ -55,18 +68,18 @@
             <div class="col-md-6">
               <label for="gender" class="fs-normal mb-1 @error('gender') is-invalid @enderror">Gender : </label>
               <select name="gender" id="gender" class="form-control rad-6 fs-normal">
-                <option value="1">Laki-laki</option>
-                <option value="1">Perempuan</option>
-                <option value="1">Hidden</option>
+                <option value="L" {{ ($user->gender == 'L') ? 'selected' : '' }}>Laki-laki</option>
+                <option value="P" {{ ($user->gender == 'P') ? 'selected' : '' }}>Perempuan</option>
+                <option value="C" {{ ($user->gender == 'C') ? 'selected' : '' }}>Hidden</option>
               </select>
               @error('gender')
                 <div class="invalid-feedback ml-1">{{ $message }}</div>
               @enderror
             </div>
             <div class="col-md-6">
-              <label for="photo" class="fs-normal mb-1">Photo : </label>
-              <input type="file" name="photo" class="form-control rad-6 fs-normal @error('photo') is-invalid @enderror" placeholder="Photo">
-              @error('photo')
+              <label for="photo_profile" class="fs-normal mb-1">Photo : </label>
+              <input type="file" name="photo_profile" class="form-control rad-6 fs-normal @error('photo_profile') is-invalid @enderror" placeholder="Photo_profile" value="{{ auth()->user()->photo_profile }}">
+              @error('photo_profile')
                 <div class="invalid-feedback ml-1">{{ $message }}</div>
               @enderror
             </div>
@@ -74,14 +87,14 @@
 
           <div class="mb-3">
             <label for="address" class="fs-normal mb-1">Address : </label>
-            <input type="text" name="address" class="form-control rad-6 fs-normal @error('address') is-invalid @enderror" placeholder="Address">
+            <input type="text" name="address" class="form-control rad-6 fs-normal @error('address') is-invalid @enderror" placeholder="Address" value="{{ $user->address }}">
             @error('address')
               <div class="invalid-feedback ml-1">{{ $message }}</div>
             @enderror
           </div>
 
           <div class="mb-3">
-            <button class="btn btn-primary fs-normal px-5 float-end py-2 rad-6">Update</button>
+            <button type="submit" class="btn btn-primary fs-normal px-5 float-end py-2 rad-6">Update</button>
           </div>
 
         </form>

@@ -4,7 +4,11 @@
         <h4 class="fs-medium font-medium px-3 mt-3">Navigation</h4>
         <div class="p-4 top-10 text-center">
           <div class="bg-light w-100 cover-image">
-            <img src="{{ asset('img/profile.png') }}" alt="" class="w-100">
+            @if (auth()->user()->photo_profile == null)
+              <img src="{{ asset('img/profile.png') }}" alt="" class="w-100">
+            @else
+              <img src="{{ asset('storage/'.auth()->user()->photo_profile) }}" alt="" class="w-100">
+            @endif
           </div>
           <span class="text-center fs-small">Admin@gmail.com</span>
         </div>

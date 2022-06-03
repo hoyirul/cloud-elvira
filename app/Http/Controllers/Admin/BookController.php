@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Genre;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -53,10 +54,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
+        // ddd($request->all());
         $request->validate([
             'author_id' => 'required',
             'publisher_id' => 'required',
-            'gender_id' => 'required',
+            'genre_id' => 'required',
             'title' => 'required|string|max:255',
             'publish_date' => 'required',
             'book_pages' => 'required',
@@ -66,8 +69,21 @@ class BookController extends Controller
             'cover_image' => 'required',
         ]);
 
+        if($request->file('cover_image')){
+            $cover_image = $request->file('cover_image')->store('book', 'public');
+        }
+
         Book::create([
-            'book' => $request->book
+            'author_id' => $request->author_id,
+            'publisher_id' => $request->publisher_id,
+            'genre_id' => $request->genre_id,
+            'title' => $request->title,
+            'publish_date' => $request->publish_date,
+            'book_pages' => $request->book_pages,
+            'description' => $request->description,
+            'rating' => $request->rating,
+            'price' => $request->price,
+            'cover_image' => $cover_image
         ]);
         
         return redirect('/u/book')->with('success', "Data berhasil ditambahkan");
@@ -95,8 +111,11 @@ class BookController extends Controller
     public function edit($id)
     {
         $title = 'Books';
+        $authors = Author::all();
+        $publishers = Publisher::all();
+        $genres = Genre::all();
         $books = Book::where('id', $id)->first();
-        return view('admin.books.edit', compact('title', 'books'));
+        return view('admin.books.edit', compact('title', 'books', 'authors', 'publishers', 'genres'));
     }
 
     /**
@@ -108,12 +127,42 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $book = Book::where('id', $id)->first();
+        // dd($book->cover_image);
         $request->validate([
-            'genre' => 'required'
+            'author_id' => 'required',
+            'publisher_id' => 'required',
+            'genre_id' => 'required',
+            'title' => 'required|string|max:255',
+            'publish_date' => 'required',
+            'book_pages' => 'required',
+            'description' => 'required|string',
+            'rating' => 'required',
+            'price' => 'required',
+            'cover_image' => 'required',
         ]);
 
+        if($book->cover_image && file_exists(storage_path('app/public/'. $book->cover_image))){
+            Storage::delete(['public/', $book->cover_image]);
+        }
+
+        $cover_image = null;
+
+        if($request->cover_image != null){
+            $cover_image = $request->file('cover_image')->store('book', 'public');
+        }
+
         Book::where('id', $id)->update([
-            'genre' => $request->genre
+            'author_id' => $request->author_id,
+            'publisher_id' => $request->publisher_id,
+            'genre_id' => $request->genre_id,
+            'title' => $request->title,
+            'publish_date' => $request->publish_date,
+            'book_pages' => $request->book_pages,
+            'description' => $request->description,
+            'rating' => $request->rating,
+            'price' => $request->price,
+            'cover_image' => $cover_image
         ]);
         
         return redirect('/u/book')->with('success', "Data berhasil diubah");

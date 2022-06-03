@@ -5,22 +5,24 @@
         <h5 class="modal-title" id="filterModalLabel">Filter</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/" method="get">
-        @csrf
+      <form action="/book" method="get">
+        {{-- @csrf --}}
         <div class="modal-body">
           <div class="mb-3">
             <input type="text" name="search" class="form-control rad-8 fs-normal" placeholder="Search here">    
           </div>
 
-          <div>
-            <select name="category" id="category" class="form-control rad-8 fs-normal">
-              <option value="{{ 1 }}">Category 1</option>
-              <option value="{{ 1 }}">Category 1</option>
+          <div class="">
+            <select name="genre_id" id="genre_id" class="form-control rad-8 fs-normal">
+              <option disabled selected>Select Book Genre</option>
+              @foreach ($genres as $item)  
+                <option value="{{ $item->id }}">{{ $item->genre }}</option>
+              @endforeach
             </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary rad-8 fs-normal">Save Changes</button>
+          <button type="submit" class="btn btn-primary rad-8 fs-normal">Save Changes</button>
         </div>
       </form>
     </div>

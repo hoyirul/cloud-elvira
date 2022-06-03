@@ -5,8 +5,14 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PublisherController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\User\BookController as UserBookController;
+use App\Http\Controllers\User\CartController as UserCartController;
+use App\Http\Controllers\User\HomeController as UserHomeController;
+use App\Http\Controllers\User\SettingController as UserSettingController;
+use App\Http\Controllers\User\TransactionController as UserTransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,23 +30,30 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/', [PageController::class, 'index']);
-Route::get('/book', [PageController::class, 'index']);
-Route::get('/book/{id}/show', [PageController::class, 'show']);
+Route::get('/', [UserBookController::class, 'index']);
+Route::get('/book', [UserBookController::class, 'index']);
+Route::get('/book/{id}/show', [UserBookController::class, 'show']);
 
 
 Route::middleware(['auth', 'isCustomer'])->group(function(){
-    Route::get('/cart/{id}/show', [PageController::class, 'cart']);
-    Route::get('/cart/{id}/edit', [PageController::class, 'cart_edit']);
-    Route::get('/checkout/{id}/detail', [PageController::class, 'checkout_detail']);
-    Route::post('/checkout/{id}', [PageController::class, 'checkout']);
+    Route::get('/cart/{id}/show', [UserCartController::class, 'index']);
+    Route::post('/cart/{id}/add', [UserCartController::class, 'store']);
+    Route::get('/cart/{id}/edit', [UserCartController::class, 'edit']);
+    Route::put('/cart/{id}', [UserCartController::class, 'update']);
+    Route::delete('/cart/{id}', [UserCartController::class, 'destroy']);
 
-    Route::get('/user/dashboard', [PageController::class, 'dashboard']);
-    Route::put('/user/update', [PageController::class, 'update_profile']);
-    Route::get('/user/transaction', [PageController::class, 'transaction']);
-    Route::get('/user/transaction/{id}/detail', [PageController::class, 'transaction_detail']);
-    Route::get('/user/change_password', [PageController::class, 'change_password']);
-    Route::put('/user/change_password', [PageController::class, 'update_password']);
+    Route::get('/checkout/{id}/detail', [UserCartController::class, 'checkout_detail']);
+    Route::post('/checkout', [UserCartController::class, 'checkout']);
+
+    Route::get('/user/dashboard', [UserHomeController::class, 'index']);
+    Route::put('/user/update', [UserSettingController::class, 'update_profile']);
+
+    Route::get('/user/transaction', [UserTransactionController::class, 'transaction']);
+    Route::get('/user/transaction/{id}/detail', [UserTransactionController::class, 'transaction_detail']);
+    Route::get('/user/transaction/{id}/print', [UserTransactionController::class, 'transaction_print']);
+
+    Route::get('/user/change_password', [UserSettingController::class, 'change_password']);
+    Route::put('/user/change_password', [UserSettingController::class, 'update_password']);
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function(){
@@ -70,5 +83,12 @@ Route::middleware(['auth', 'isAdmin'])->group(function(){
         Route::resource('genre', GenreController::class);
         
         Route::resource('book', BookController::class);
+
+        Route::controller(AdminTransactionController::class)->group(function(){
+            Route::get('/transaction', 'index');
+            Route::get('/transaction/{id}/detail', 'detail');
+            Route::get('/transaction/{id}/status', 'status');
+            Route::get('/transaction/report', 'report');
+        });
     });
 });

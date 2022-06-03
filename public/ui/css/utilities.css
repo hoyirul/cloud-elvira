@@ -45,6 +45,14 @@ body{
     background-color: #cbeae4 !important;
 }
 
+.bg-badge-warning{
+    background-color: #ffeec9 !important;
+}
+
+.bg-badge-grey{
+    background-color: #e3e3e3 !important;
+}
+
 .bg-badge-danger{
     background-color: #f4d5d8 !important;
 }
@@ -55,6 +63,10 @@ body{
 
 .bg-light{
     background-color: var(--light) !important;
+}
+
+.color-warning{
+    color: #e4a609 !important;
 }
 
 .color-grey{
@@ -260,6 +272,16 @@ tr{
 
 tr, thead{
     border-bottom-style: hidden;
+}
+
+.alert{
+    font-size: 9pt !important;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.invalid-feedback{
+    font-size: 9pt !important;
 }
 
 #layoutAuthentication{

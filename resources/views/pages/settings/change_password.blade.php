@@ -15,16 +15,28 @@
         <h6 class="font-medium">Change Password</h6>
         <p class="top-5 color-grey fs-small text-grey font-regular">App / User / <span class="color-primary">Change Password</span></p>
         
-        <form action="/" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="_token" value="pxZsPOmRjfoZq9nRfKe8ucPLBXfB3ukvalsnw6fr">            <input type="hidden" name="_method" value="PUT">
+        @if(session('success'))
+          <div class="alert alert-success">
+            {{session('success')}}
+          </div>
+        @endif
+        @if(session('danger'))
+        <div class="alert alert-danger">
+          {{session('danger')}}
+        </div>
+        @endif
+
+        <form action="/user/change_password" method="post" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
           <div class="mb-3 row">
             <div class="col-md-6">
               <label for="email" class="fs-normal mb-1">Email : </label>
-              <input type="email" readonly name="email" class="form-control rad-6 fs-normal" placeholder="Email">
+              <input type="email" readonly name="email" value="{{ $user->user->email }}" class="form-control rad-6 fs-normal" placeholder="Email">
             </div>
             <div class="col-md-6">
               <label for="name" class="fs-normal mb-1">Full Name : </label>
-              <input type="text" readonly name="name" class="form-control rad-6 fs-normal" placeholder="Full Name">
+              <input type="text" readonly name="name" value="{{ $user->name }}" class="form-control rad-6 fs-normal" placeholder="Full Name">
             </div>
           </div>
 
