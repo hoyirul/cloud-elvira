@@ -32,10 +32,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/', [UserBookController::class, 'index']);
 Route::get('/book', [UserBookController::class, 'index']);
-Route::get('/book/{id}/show', [UserBookController::class, 'show']);
-
 
 Route::middleware(['auth', 'isCustomer'])->group(function(){
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/u/add_profile', 'add');
+    });
+
+    Route::get('/book/{id}/show', [UserBookController::class, 'show']);
+    
     Route::get('/cart/{id}/show', [UserCartController::class, 'index']);
     Route::post('/cart/{id}/add', [UserCartController::class, 'store']);
     Route::get('/cart/{id}/edit', [UserCartController::class, 'edit']);
@@ -59,8 +63,13 @@ Route::middleware(['auth', 'isCustomer'])->group(function(){
 Route::middleware(['auth', 'isAdmin'])->group(function(){
     
     Route::prefix('/u')->group(function(){
-        Route::get('dashboard', [HomeController::class, 'index']);
-        
+        Route::controller(HomeController::class)->group(function(){
+            Route::get('dashboard', 'index');
+            Route::put('update_profile', 'update_profile');
+            Route::get('change_password', 'change_password');
+            Route::put('update_password', 'update_password');
+        });
+
         Route::controller(UserController::class)->group(function(){
             Route::get('add_profile', 'add');
             

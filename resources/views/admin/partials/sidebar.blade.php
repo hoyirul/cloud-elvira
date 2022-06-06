@@ -10,7 +10,11 @@
   </a>
 
   <div class="profile text-center mb-3">
-    <img class="img-profile rounded-circle w-25" src="{{ asset('/img/profile.png') }}">
+    @if (Auth::user()->photo_profile == null)
+      <img class="img-profile rounded-circle w-25" src="{{ asset('/img/profile.png') }}">
+    @else
+      <img class="img-profile rounded-circle w-25" src="{{ asset('storage/'.Auth::user()->photo_profile) }}">
+    @endif
     <p class="text-white fs-normal">
       {{ auth()->user()->email }} <br>
       <span class="fs-small">{{ auth()->user()->role }} Bookstore</span>
