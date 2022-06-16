@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('admin.layouts.main')
 @section('content')
 <!-- Begin Page Content -->
 <div class="container fs-normal">
