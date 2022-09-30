@@ -50,14 +50,14 @@
     </li>
   
     <li class="nav-item active border-bottom">
-      <a class="nav-link px-5 collapsed" href="#" data-toggle="collapse" data-target="#collapseMaster" aria-expanded="true" aria-controls="collapseMaster">
+      <a class="nav-link px-5 collapsed" data-id="masterData" href="#" data-toggle="collapse" data-target="#collapseMaster" aria-expanded="true" aria-controls="collapseMaster">
         <i class="fas fa-fw fa-folder"></i>
         <span>Master</span>
       </a>
       <div id="collapseMaster" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Book Supports</h6>
-          <a class="collapse-item" href="/u/author">Authors</a>
+          <a class="collapse-item" data-id="authors" href="/u/author">Authors</a>
           <a class="collapse-item" href="/u/publisher">Publishers</a>
           <a class="collapse-item" href="/u/genre">Genres</a>
           {{-- <div class="collapse-divider"></div>

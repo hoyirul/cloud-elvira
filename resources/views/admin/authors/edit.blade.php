@@ -39,11 +39,11 @@
           @csrf
           <div class="form-group">
             <label for="name">Nama Author</label>
-            <input type="text" placeholder="ex: Ahmad Dahlan" class="form-control fs-normal form-spacer-20x15 @error('name') is-invalid @enderror" id="name" name="name" data-toggle="tooltip" data-placement="right" title="name Lengkap Bayi" value="{{ $authors->name }}" autofocus>
+            <input type="text" data-id="inputEditNameAuthor" placeholder="ex: Ahmad Dahlan" class="form-control fs-normal form-spacer-20x15 @error('name') is-invalid @enderror" id="name" name="name" data-toggle="tooltip" data-placement="right" title="name Lengkap Bayi" value="{{ $authors->name }}" autofocus>
             @error('name')<div class="invalid-feedback ml-1">Bidang ini wajib diisi</div>@enderror
           </div>
          
-          <button type="submit" class="btn btn-primary font-medium float-right py-2 px-5">Update</button>
+          <button type="submit" data-id="btnUpdateAuthor" class="btn btn-primary font-medium float-right py-2 px-5">Update</button>
          </form>
       </div>
    </div>

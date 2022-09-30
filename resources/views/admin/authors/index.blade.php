@@ -21,9 +21,9 @@
   <!-- DataTales Example -->
   <div class="card shadow mb-5 border-0">
     <div class="card-body">
-      <h5 class="m-0 font-weight-bold color-primary mb-2">Tabel Data {{ $title }}</h5>
+      <h5 class="m-0 font-weight-bold color-primary mb-2" data-id="titleAuthor">Tabel Data {{ $title }}</h5>
       <p class="mb-3 float-left">Halaman ini untuk pengelolaan {{ strtolower($title) }}</p>
-      <a href="/u/author/create" class="btn btn-primary py-2 px-3 fs-normal float-right mb-3 shadow-sm"><span class="fas fa-user-plus"></span> Tambah Data</a>
+      <a href="/u/author/create" data-id="authorAdd" class="btn btn-primary py-2 px-3 fs-normal float-right mb-3 shadow-sm"><span class="fas fa-user-plus"></span> Tambah Data</a>
       
       <div class="table-responsive">
         <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -46,12 +46,12 @@
                   @csrf
                   @method('DELETE')
 
-                  <a href="/u/author/{{ $row->id }}/edit" class="btn fs-small btn-info text-decoration-none">
+                  <a href="/u/author/{{ $row->id }}/edit" data-id="authorEdit{{ $row->id }}" class="btn fs-small btn-info text-decoration-none">
                     <span class="fa fa-fw fa-syringe mx-1"></span>
                     Edit
                   </a>
 
-                  <button type="submit" class="btn fs-small btn-danger">
+                  <button type="submit" data-id="authorDelete{{ $row->id }}" class="btn fs-small btn-danger">
                     <span class="fa fa-fw fa-trash mx-1"></span>
                   Hapus
                   </button>
