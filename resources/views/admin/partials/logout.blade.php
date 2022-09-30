@@ -12,7 +12,7 @@
       <div class="modal-footer mx-3">
         <button class="btn btn-secondary fs-normal" type="button" data-dismiss="modal">Cancel</button>
         {{-- <a class="btn btn-primary" href="{{ url('/login') }}">Logout</a> --}}
-        <a class="btn btn-primary fs-normal" href="{{ route('logout') }}"
+        <a class="btn btn-primary fs-normal" data-id="btnToHome" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
             {{ __('Logout') }}

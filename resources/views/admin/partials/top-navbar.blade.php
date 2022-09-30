@@ -13,7 +13,7 @@
 
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" data-id="avatar" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="mr-2 d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
         @if (Auth::user()->photo_profile == null)
           <img class="img-profile rounded-circle" src="{{ asset('/img/profile.png') }}">
@@ -28,7 +28,7 @@
           Ubah Password
         </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+        <a class="dropdown-item" data-id="btnLogout" href="#" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
           Logout
         </a>

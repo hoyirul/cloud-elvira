@@ -11,12 +11,12 @@
               <div class="p-3"></div>
               <div class="card shadow-sm border-0 rounded-lg mt-5 rad-20">
                 <div class="card-body m-3">
-                  <h3 class="text-center font-weight-light my-4 mb-5 color-primary font-semibold">BookStore*</h3>
+                  <h3 class="text-center font-weight-light my-4 mb-5 color-primary font-semibold" data-id="title">BookStore*</h3>
                   <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="form-floating mb-3 fs-normal">
-                      <label for="email">Email address</label>
-                      <input id="email" type="email" class="form-control form-spacer-25x20 rad-10 fs-normal @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                      <label for="email" data-id="lblEmail">Email address</label>
+                      <input id="email" data-id="inputEmail" type="email" class="form-control form-spacer-25x20 rad-10 fs-normal @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Email">
                       @error('email')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -24,8 +24,8 @@
                       @enderror
                     </div>
                     <div class="form-floating mb-3 fs-normal">
-                      <label for="password">Password</label>
-                      <input id="password" type="password" class="form-control rad-10 form-spacer-25x20 fs-normal @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                      <label for="password" data-id="lblPassword">Password</label>
+                      <input id="password" type="password" data-id="inputPassword" class="form-control rad-10 form-spacer-25x20 fs-normal @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
                       @error('password')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                           {{ __('Kembali') }}
                       </a>
                       
-                      <button type="submit" class="btn btn-primary py-2 px-5 rad-10 font-medium">
+                      <button type="submit" data-id="btnLogin" class="btn btn-primary py-2 px-5 rad-10 font-medium">
                           {{ __('Login') }}
                       </button>
                     </div>
