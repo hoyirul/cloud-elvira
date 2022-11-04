@@ -23,6 +23,7 @@
         <a href="/book/{{ $item->id }}/show" class="text-decoration-none text-dark">
           <div class="card w-100 border-0 rad-10">
             <div class="cover p-3">
+              <img src="{{ $item->url_cloud }}" class="card-img-top h-64 w-full object-cover rounded-lg d-none">
               <img src="{{ asset('storage/'.$item->cover_image) }}" class="card-img-top h-64 w-full object-cover rounded-lg">
             </div>
             <div class="card-body top-20">

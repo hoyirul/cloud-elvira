@@ -9,6 +9,7 @@ use App\Models\Genre;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Google\Cloud\Storage\StorageClient;
 
 class BookController extends Controller
 {
@@ -73,6 +74,23 @@ class BookController extends Controller
             $cover_image = $request->file('cover_image')->store('book', 'public');
         }
 
+        $googleConfigFile = file_get_contents(env('GOOGLE_APPLICATION_CREDENTIALS'));
+        $storage = new StorageClient([
+            'keyFile' => json_decode($googleConfigFile, true)
+        ]);
+
+        $storageBucketName = config('googlecloud.storage_bucket');
+        $bucket = $storage->bucket($storageBucketName);
+        $fileSource = $cover_image;
+        $googleCloudStoragePath = $cover_image;
+        /* Upload a file to the bucket.
+        Using Predefined ACLs to manage object permissions, you may
+        upload a file and give read access to anyone with the URL.*/
+        $bucket->upload($fileSource, [
+        // 'predefinedAcl' => 'publicRead',
+            'name' => $googleCloudStoragePath
+        ]);
+
         Book::create([
             'author_id' => $request->author_id,
             'publisher_id' => $request->publisher_id,
@@ -83,7 +101,8 @@ class BookController extends Controller
             'description' => $request->description,
             'rating' => $request->rating,
             'price' => $request->price,
-            'cover_image' => $cover_image
+            'cover_image' => $cover_image,
+            'url_cloud' => 'https://storage.cloud.google.com/'.$storageBucketName.'/'.$googleCloudStoragePath
         ]);
         
         return redirect('/u/book')->with('success', "Data berhasil ditambahkan");

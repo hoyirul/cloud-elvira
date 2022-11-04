@@ -20,6 +20,7 @@ class Book extends Model
         'rating',
         'price',
         'cover_image',
+        'url_cloud',
     ];
 
     public function author(){
