@@ -78,19 +78,17 @@ Route::prefix('home')->group(function(){
     });
 });
 
-// Route::middleware(['auth', 'isAdmin'])->group(function(){
-    Route::prefix('admin')->group(function(){
-        Route::controller(AdminHomeController::class)->group(function(){
-            Route::get('home', 'index');
-            Route::put('update_profile', 'update_profile');
-            Route::put('update_password', 'update_password');
-        });
-        Route::resource('category', AdminCategoryController::class);
-        Route::resource('product', AdminProductController::class);
-        Route::resource('order', AdminOrderController::class);
-        Route::get('/export', [AdminOrderController::class, 'export'])->name('export');
-        Route::resource('user', AdminUserController::class);
-        Route::resource('level', AdminLevelController::class);
+Route::prefix('admin')->group(function(){
+    Route::controller(AdminHomeController::class)->group(function(){
+        Route::get('home', 'index');
+        Route::put('update_profile', 'update_profile');
+        Route::put('update_password', 'update_password');
     });
-// });
+    Route::resource('category', AdminCategoryController::class);
+    Route::resource('product', AdminProductController::class);
+    Route::resource('order', AdminOrderController::class);
+    Route::get('/export', [AdminOrderController::class, 'export'])->name('export');
+    Route::resource('user', AdminUserController::class);
+    Route::resource('level', AdminLevelController::class);
+});
 
