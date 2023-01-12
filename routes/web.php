@@ -47,28 +47,21 @@ Route::get('/', [CustomerHomeController::class, 'index']);
 Route::get('/home', [CustomerHomeController::class, 'index'])->name('home');
 Route::get('/detail/{id}', [CustomerHomeController::class, 'detail']);
 
-// Route::middleware('auth')->group(function(){
-    Route::controller(CustomerCartController::class)->group(function(){
-        Route::get('cart', 'index');
-        Route::post('cart', 'store');
-        Route::get('cart/{id}/edit', 'edit');
-        Route::put('cart/{id}', 'update');
-        Route::delete('cart/{id}', 'destroy');
-        Route::post('checkout', 'store');
-    });
+Route::controller(CustomerCartController::class)->group(function(){
+    Route::get('cart', 'index');
+    Route::post('cart', 'store');
+    Route::get('cart/{id}/edit', 'edit');
+    Route::put('cart/{id}', 'update');
+    Route::delete('cart/{id}', 'destroy');
+    Route::post('checkout', 'store');
+});
 
-    Route::controller(CustomerOrderController::class)->group(function(){
-        Route::get('order', 'index');
-        Route::get('order', 'cetak_pdf');
-        Route::post('order', 'store');
-        Route::get('order/{id}/detail', 'detail');
-    });
-// });
-
-// Route::get('/detail/{id}', [App\Http\Controllers\DetailController::class, 'index']);
-// Route::post('/pesan/{id}', [App\Http\Controllers\DetailController::class, 'order']);
-// Route::post('/checkout', [App\Http\Controllers\DetailController::class, 'checkout']);
-// Route::delete('/checkout/{id}', [App\Http\Controllers\DetailController::class, 'delete']);
+Route::controller(CustomerOrderController::class)->group(function(){
+    Route::get('order', 'index');
+    Route::get('order', 'cetak_pdf');
+    Route::post('order', 'store');
+    Route::get('order/{id}/detail', 'detail');
+});
 
 Route::prefix('home')->group(function(){
     Route::controller(ProfileController::class)->group(function(){
