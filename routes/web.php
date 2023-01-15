@@ -56,6 +56,7 @@ Route::controller(CustomerCartController::class)->group(function(){
     Route::post('checkout', 'store');
 });
 
+
 Route::controller(CustomerOrderController::class)->group(function(){
     Route::get('order', 'index');
     Route::get('order', 'cetak_pdf');
